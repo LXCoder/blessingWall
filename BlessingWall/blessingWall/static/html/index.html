@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>祝福墙</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        .blessing_form {
+            padding-top: 30px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .right {
+            float: right;
+        }
+
+        #err_msg {
+            color: red;
+        }
+        h2{
+            margin-top: 8px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="text-center">祝福墙</h2>
+        <form class="blessing_form">
+            <div class="form-group">
+                <label for="name">姓名:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="可不填">
+            </div>
+            <div class="form-group">
+                <label for="banji">班级:</label>
+                <input type="text" class="form-control" id="banji" name="banji" placeholder="可不填">
+            </div>
+            <div class="form-group">
+                <label for="comment">祝福语:</label>
+                <textarea class="form-control" rows="3" name="comment" id="comment" placeholder="请输入祝福语"
+                    maxlength="20"></textarea>
+                <div class="row">
+                    <div class="col-10">
+                        <span id="err_msg"></span>
+                    </div>
+                    <div class="col-2">
+                        <em id="word_nums">0</em>/<span>20</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
+
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="static/js/common.js"></script>
+    <script src="static/js/blessWall/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>建党100周年交互投影弹幕管理系统</title>
+
+    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="../static/css/index.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark">
+        <a class="navbar-brand" href="#">祝福语管理系统</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li id="pending" class="nav-item">
+                    <a class="nav-link" href="/admin.html?state=0">待审核</a>
+                </li>
+                <li id="passed" class="nav-item">
+                    <a class="nav-link" href="/admin.html?state=1">已通过</a>
+                </li>
+                <li id="blocked" class="nav-item">
+                    <a class="nav-link" href="/admin.html?state=2">已屏蔽</a>
+                </li>
+                <li id="logout" class="nav-item">
+                    <a class="nav-link" href="#">退出</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="container-fluid">
+
+        <script id="bless_list_tmpl" type="text/html">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th>
+                                <label class="lyear-checkbox checkbox-primary">
+                                    <input id="check_all" type="checkbox" onclick="checkAll(this)">
+                                </label>
+                            </th>
+                            <th>编号</th>
+                            <th>姓名</th>
+                            <th>班级</th>
+                            <th>祝福语</th>
+                            <th>状态</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {{each data.blesses as bless}}
+                        <tr>
+                            <td>
+                                <label class="lyear-checkbox checkbox-primary">
+                                    <input class="itemChecked" type="checkbox" value="{{bless.id}}">
+                                </label>
+                            </td>
+                            <td>{{bless.id}}</td>
+                            <td>{{bless.name}}</td>
+                            <td>{{bless.banji}}</td>
+                            <td class="text-left">{{bless.bless}}</td>
+                            <td>
+                                {{if bless.state == 0}}
+                                <font class="text-success">待审核</font>
+                                {{else if bless.state == 1}}
+                                <font class="text-success">通过</font>
+                                {{else}}
+                                <font class="text-success">屏蔽</font>
+                                {{/if}}
+                            </td>
+                            <td>{{bless.time}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <div style="float: right;">
+                    {{if data.state == 0}}
+                    <button id="pass_btn" type="button" class="btn btn-danger" data-type="1" onclick="passOrBlock(this)">通过</button>
+                    <button id="block_btn" type="button" class="btn btn-danger" data-type="2" onclick="passOrBlock(this)">屏蔽</button>
+                    {{else if data.state == 1}}
+                    <button id="block_btn" type="button" class="btn btn-danger" data-type="2" onclick="passOrBlock(this)">屏蔽</button>
+                    {{else}}
+                    <button id="pass_btn" type="button" class="btn btn-danger" data-type="1" onclick="passOrBlock(this)">通过</button>
+                    {{/if}}
+                    <button id="del_btn" type="button" class="btn btn-danger" onclick="deleteBless()">删除</button>
+                </div>
+            </div>
+            <ul class="pagination">
+                {{if data.has_prev}}
+                <li><a  href="#" onclick="unpdateBlessData({{data.state}},{{data.current_page-1}})"><span>«</span></a></li>
+                {{else}}
+                <li class="disabled"><span>«</span></li>
+                {{/if}}
+
+                {{each data.page_li as page}}
+                    {{if page}}
+                        {{if page == data.current_page}}
+                        <li class="active"><span>{{page}}</span></li>
+                        {{else}}
+                        <li><a href="#" onclick="unpdateBlessData({{data.state}},{{page}})">{{page}}</a></li>
+                        {{/if}}
+                    {{else}}
+                    <li class="disabled"><span>...</span></li>
+                    {{/if}}
+                {{/each}}
+    
+                {{if data.has_next}}
+                <li><a href="#" onclick="unpdateBlessData({{data.state}},{{data.current_page+1}})"><span>»</span></a></li>
+                {{else}}
+                <li class="disabled"><span>»</span></li>
+                {{/if}}
+            </ul>
+        </script>
+    </div>
+
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="static/js/template.js"></script>
+    <script src="static/js/common.js"></script>
+    <script src="static/js/blessWall/admin.js"></script>
+
+</body>
+
+</html>
