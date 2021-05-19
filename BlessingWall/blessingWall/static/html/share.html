@@ -21,15 +21,21 @@
             border: 2px solid #f96868
         }
 
-        #bless {
-            padding-left: 15%;
-            padding-right: 18%;
-            padding-top: 3px;
-            padding-bottom: 3px;
+        .bless{
+            position: absolute;
+            top: 83%;
+            left: 11%;
+            right: 11%;
+        }
+        .bless h3{
+            
+            font-family: cursive;
+            font-size: 2.1vw;
             margin-bottom: 0;
         }
 
         .center {
+            position: relative;
             margin: auto;
             width: 50%;
             padding: 2px;
@@ -65,30 +71,55 @@
         </div>
         <div id="showArea" class="center">
             <img id="danmubg" class="img-fluid" src="">
-            <p id="bless" class="font-weight-bold"></p>
+            <div class="bless">
+                <h3 id="blessContent" class="font-weight-bold">在党的领导下，才有现在的新中国！</h3>
+                <h3 id="blessName" class="font-weight-bold text-right">——西野</h3>
+            </div>
         </div>
         <div style="height: 10px;"></div>
         <table>
-            <span>选择图片转发你对祖国的祝福吧</span>
+            <span>选择图片留下对祖国的祝福吧</span>
             <tbody>
                 <tr>
-                    <td><img src="../static/img/1.png" class="img-thumbnail active" data-id="0"></td>
-                    <td><img src="../static/img/2.png" class="img-thumbnail" data-id="1"></td>
-                    <td><img src="../static/img/3.png" class="img-thumbnail" data-id="2"></td>
-                    <td><img src="../static/img/4.png" class="img-thumbnail" data-id="3"></td>
-                    <td><img src="../static/img/5.png" class="img-thumbnail" data-id="4"></td>
-                    <td><img src="../static/img/6.png" class="img-thumbnail" data-id="5"></td>
-                    <td><img src="../static/img/7.png" class="img-thumbnail" data-id="6"></td>
-                    <td><img src="../static/img/8.png" class="img-thumbnail" data-id="7"></td>
-                    <td><img src="../static/img/9.png" class="img-thumbnail" data-id="8"></td>
-                    <td><img src="../static/img/10.png" class="img-thumbnail" data-id="9"></td>
+                    <td><img src="../static/img/1.jpg" class="img-thumbnail active" data-id="0"></td>
+                    <td><img src="../static/img/2.jpg" class="img-thumbnail" data-id="1"></td>
+                    <td><img src="../static/img/3.jpg" class="img-thumbnail" data-id="2"></td>
+                    <td><img src="../static/img/4.jpg" class="img-thumbnail" data-id="3"></td>
+                    <td><img src="../static/img/5.jpg" class="img-thumbnail" data-id="4"></td>
+                </tr>
+                <tr>
+                    <td><img src="../static/img/6.jpg" class="img-thumbnail" data-id="5"></td>
+                    <td><img src="../static/img/7.jpg" class="img-thumbnail" data-id="6"></td>
+                    <td><img src="../static/img/8.jpg" class="img-thumbnail" data-id="7"></td>
+                    <td><img src="../static/img/9.jpg" class="img-thumbnail" data-id="8"></td>
+                    <td><img src="../static/img/10.jpg" class="img-thumbnail" data-id="9"></td>
                 </tr>
             </tbody>
         </table>
         <button id="back" type="button" class="btn btn-primary" style="margin-top: 30px;">返回</button>
-        <button id="share" type="button" class="btn btn-primary right">分享</button>
+        <button id="share" type="button" class="btn btn-primary right">保存图片</button>
     </div>
 
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">请长按图片进行保存</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <img id="modalImg" class="img-fluid" src="">
+                </div>
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
@@ -97,9 +128,6 @@
     <script src="static/js/common.js"></script>
     <script src="static/js/html2canvas.js"></script>
     <script src="static/js/blessWall/share.js"></script>
-
-
-
 
 </body>
 

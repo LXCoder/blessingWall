@@ -15,14 +15,25 @@ $(document).ready(function () {
         $(this).next().children('em').text(str.length);
     })
 
+    $("#name").on("focus", function () {
+        $("#err_msg").hide();
+    })
+
     // 为表单的提交补充自定义的函数行为 （提交事件e）
     $(".blessing_form").submit(function (e) {
         // 阻止浏览器对于表单的默认自动提交行为
         e.preventDefault();
 
         let name = $("#name").val().trim();
-        let banji = $("#banji").val().trim();
         let comment = $("#comment").val().trim();
+
+        if(!name){
+            $("#name").val("");
+            $("#err_msg").text("姓名不能为空");
+            $("#err_msg").show();
+            return;
+        }
+
         if (!comment) {
             $("#comment").val("");
             $("#err_msg").text("祝福不能为空");
@@ -33,11 +44,9 @@ $(document).ready(function () {
         // 调用ajax向后端发送注册请求
         let req_data = {
             name: name,
-            banji: banji,
             comment: comment
         };
         let req_json = JSON.stringify(req_data);
-
 
         $.ajax({
             url: "/blessing",
@@ -51,7 +60,7 @@ $(document).ready(function () {
             success: function (resp) {
                 if (resp.errno == "0") {
                     // 注册成功，跳转到分享页
-                    location.href = "/share.html?bless=" + encodeURI(encodeURI(comment));
+                    location.href = "/share.html?bless=" + encodeURI(encodeURI(comment)) + "&name=" + encodeURI(encodeURI(name));
                 } else {
                     $("#err_msg").text(resp.errmsg);
                     $("#err_msg").show();

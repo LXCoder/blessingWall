@@ -9,7 +9,7 @@ class Bless(db.Model):
     bless = db.Column(db.String(255),default = '',nullable=False)
     state = db.Column(db.Integer,default = 0,nullable=False)
     time = db.Column(db.DateTime,default=datetime.now,onupdate=datetime.now)
-    name = db.Column(db.String(10),default = '')
+    name = db.Column(db.String(10),default = '',nullable=False)
     banji = db.Column(db.String(20),default = '')
 
     #repr()方法显示一个可读字符串

@@ -46,22 +46,17 @@ def blessing():
 
     # 获取请求的json数据，返回字典
     req_dict = request.get_json()
-
     name = req_dict.get("name").strip()
-    banji = req_dict.get("banji").strip()
     comment = req_dict.get("comment").strip()
-    # 校验参数
-    if not comment:
-        return jsonify(errno=RET.PARAMERR, errmsg="祝福语不能为空")
-    
-    if len(comment) == 0:
-        return jsonify(errno=RET.PARAMERR, errmsg="祝福语不能为空")
 
-    bless = Bless(bless=comment)
-    if name:
-        bless.name = name
-    if banji:
-        bless.banji = banji
+    # 校验参数
+    if not all([name,comment]):
+        return jsonify(errno=RET.PARAMERR, errmsg="姓名或祝福语不能为空")
+    
+    if len(comment) == 0 or len(name) == 0:
+        return jsonify(errno=RET.PARAMERR, errmsg="姓名或祝福语不能为空")
+
+    bless = Bless(bless=comment,name=name)
     # 查询该祝福语是否存在
     _bless = Bless.query.filter(Bless.bless == comment).first()
     
